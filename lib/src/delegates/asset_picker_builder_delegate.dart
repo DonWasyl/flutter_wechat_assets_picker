@@ -491,7 +491,7 @@ abstract class AssetPickerBuilderDelegate<Asset, Path> {
       child: IconButton(
         onPressed: () =>
             Navigator.of(context).maybePop(provider.selectedAssets),
-        icon: const Icon(Icons.close),
+        icon: const BackButtonIcon(),
       ),
     );
   }

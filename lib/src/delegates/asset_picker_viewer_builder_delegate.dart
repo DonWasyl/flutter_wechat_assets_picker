@@ -629,7 +629,7 @@ class DefaultAssetPickerViewerBuilderDelegate
             Row(
               children: <Widget>[
                 IconButton(
-                  icon: const Icon(Icons.close),
+                  icon: const BackButtonIcon(),
                   onPressed: Navigator.of(context).maybePop,
                 ),
                 const Spacer(),
