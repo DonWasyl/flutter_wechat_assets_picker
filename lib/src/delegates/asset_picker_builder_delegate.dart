@@ -458,7 +458,7 @@ abstract class AssetPickerBuilderDelegate<Asset, Path> {
       padding: const EdgeInsets.symmetric(horizontal: 20).copyWith(
         bottom: context.bottomPadding,
       ),
-      color: theme.primaryColor.withOpacity(isAppleOS ? 0.90 : 1),
+      color: theme.canvasColor.withOpacity(isAppleOS ? 0.90 : 1),
       child: Row(children: <Widget>[
         if (!isSingleAssetMode || !isAppleOS) previewButton(context),
         if (isAppleOS) const Spacer(),
@@ -1172,24 +1172,20 @@ class DefaultAssetPickerBuilderDelegate
           minWidth: provider.isSelectedNotEmpty ? 48 : 20,
           height: appBarItemHeight,
           padding: const EdgeInsets.symmetric(horizontal: 12),
-          color: provider.isSelectedNotEmpty ? themeColor : theme.dividerColor,
+          color: themeColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(3),
           ),
           child: ScaleText(
             Constants.textDelegate.confirm,
             style: TextStyle(
-              color: provider.isSelectedNotEmpty
-                  ? theme.textTheme.bodyText1?.color
-                  : theme.textTheme.caption?.color,
+              color: theme.textTheme.bodyText1?.color,
               fontSize: 17,
               fontWeight: FontWeight.normal,
             ),
           ),
           onPressed: () {
-            if (provider.isSelectedNotEmpty) {
-              Navigator.of(context).maybePop(provider.selectedAssets);
-            }
+            Navigator.of(context).maybePop(provider.selectedAssets);
           },
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         );
@@ -1356,7 +1352,7 @@ class DefaultAssetPickerBuilderDelegate
                         p.pathEntityList,
                     builder: (_, Map<AssetPathEntity, Uint8List?> list, __) {
                       return ListView.separated(
-                        padding: const EdgeInsetsDirectional.only(top: 1),
+                        padding: const EdgeInsetsDirectional.only(top: 0),
                         shrinkWrap: true,
                         itemCount: list.length,
                         itemBuilder: (BuildContext c, int i) =>
@@ -1369,7 +1365,7 @@ class DefaultAssetPickerBuilderDelegate
                               RequestType.audio,
                         ),
                         separatorBuilder: (_, __) => Container(
-                          margin: const EdgeInsetsDirectional.only(start: 60),
+                          margin: const EdgeInsetsDirectional.only(start: 0),
                           height: 1,
                           color: theme.canvasColor,
                         ),
@@ -1491,7 +1487,8 @@ class DefaultAssetPickerBuilderDelegate
           provider.switchPath(pathEntity);
           gridScrollController.jumpTo(0);
         },
-        child: SizedBox(
+        child: Container(
+          color: Colors.white,
           height: isAppleOS ? 64 : 52,
           child: Row(
             children: <Widget>[
@@ -1513,7 +1510,8 @@ class DefaultAssetPickerBuilderDelegate
                             isPermissionLimited && pathEntity.isAll
                                 ? Constants.textDelegate.accessiblePathName
                                 : pathEntity.name,
-                            style: const TextStyle(fontSize: 17),
+                            style: const TextStyle(
+                                fontSize: 17, color: Colors.black),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -1522,7 +1520,7 @@ class DefaultAssetPickerBuilderDelegate
                       ScaleText(
                         '(${pathEntity.assetCount})',
                         style: TextStyle(
-                          color: theme.textTheme.caption?.color,
+                          color: Colors.grey,
                           fontSize: 17,
                         ),
                         maxLines: 1,
@@ -1596,9 +1594,8 @@ class DefaultAssetPickerBuilderDelegate
                         ' (${provider.selectedAssets.length}/${provider.maxAssets})'
                     : Constants.textDelegate.preview,
                 style: TextStyle(
-                  color: isSelectedNotEmpty
-                      ? null
-                      : theme.textTheme.caption?.color,
+                  color:
+                      isSelectedNotEmpty ? theme.colorScheme.secondary : null,
                   fontSize: 17,
                 ),
                 maxScaleFactor: 1.2,
