@@ -489,7 +489,8 @@ abstract class AssetPickerBuilderDelegate<Asset, Path> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: IconButton(
-        onPressed: Navigator.of(context).maybePop,
+        onPressed: () =>
+            Navigator.of(context).maybePop(provider.selectedAssets),
         icon: const Icon(Icons.close),
       ),
     );
@@ -1176,10 +1177,7 @@ class DefaultAssetPickerBuilderDelegate
             borderRadius: BorderRadius.circular(3),
           ),
           child: ScaleText(
-            provider.isSelectedNotEmpty && !isSingleAssetMode
-                ? '${Constants.textDelegate.confirm}'
-                    ' (${provider.selectedAssets.length}/${provider.maxAssets})'
-                : Constants.textDelegate.confirm,
+            Constants.textDelegate.confirm,
             style: TextStyle(
               color: provider.isSelectedNotEmpty
                   ? theme.textTheme.bodyText1?.color
@@ -1595,7 +1593,7 @@ class DefaultAssetPickerBuilderDelegate
               child: ScaleText(
                 isSelectedNotEmpty
                     ? '${Constants.textDelegate.preview}'
-                        ' (${provider.selectedAssets.length})'
+                        ' (${provider.selectedAssets.length}/${provider.maxAssets})'
                     : Constants.textDelegate.preview,
                 style: TextStyle(
                   color: isSelectedNotEmpty
