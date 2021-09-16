@@ -158,7 +158,7 @@ abstract class AssetPickerBuilderDelegate<Asset, Path> {
 
   /// Blur radius in Apple OS layout mode.
   /// 苹果系列系统布局方式下的模糊度
-  double get appleOSBlurRadius => 10;
+  double get appleOSBlurRadius => 0;
 
   /// Height for the bottom occupied section.
   /// 底部区域占用的高度

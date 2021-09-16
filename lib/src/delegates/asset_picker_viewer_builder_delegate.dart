@@ -494,7 +494,7 @@ class DefaultAssetPickerViewerBuilderDelegate
                 border: Border(
                   top: BorderSide(
                     width: 1.0,
-                    color: themeData.canvasColor,
+                    color: Colors.black,
                   ),
                 ),
                 color: _backgroundColor,
@@ -622,7 +622,7 @@ class DefaultAssetPickerViewerBuilderDelegate
       ),
       child: Container(
         padding: EdgeInsetsDirectional.only(top: context.topPadding),
-        color: themeData.canvasColor,
+        color: Colors.black,
         child: Stack(
           fit: StackFit.expand,
           children: <Widget>[
